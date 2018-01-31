@@ -8,4 +8,9 @@ class Item < ApplicationRecord
     #create new association for this item
     SelectedItem.create(item_id: self.id, order_id: @order.id)
   end
+
+  def unselect
+    update_columns(selected: false, selected_at: Time.zone.now)
+    SelectedItem.find_by(item_id: self.id).destroy
+  end
 end
