@@ -1,17 +1,12 @@
 <%= form_for(@item) do |f| %>
 
-<!-- <input type="text" name="item[title]">
-<input type="text" name="item[price]">
-<input type="text" name="item[currency]">
-<input type="submit"> -->
-
-  <!-- <%= f.label :title %> -->
+  <%= f.label :title %>
   <%= f.text_field :title %>
 
-  <!-- <%= f.label :price %> -->
+  <%= f.label :price %>
   <%= f.text_field :price %>
 
-  <!-- <%= f.label :currency %> -->
+  <%= f.label :currency %>
   <%= f.text_field :currency %>
 
   <%= f.submit %>
