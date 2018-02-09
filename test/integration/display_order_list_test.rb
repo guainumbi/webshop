@@ -9,8 +9,10 @@ class DisplayOrderListTest < Capybara::Rails::TestCase
   test "displays selected items" do
     visit items_path
 
-    @tshirt.select
-    assert @tshirt.selected?
+    #instead of .select(ed?) ask: click_on button "select" //
+    # @tshirt.select
+    # assert @tshirt.selected?
+    click_on('select')
 
     visit orders_path
 
@@ -21,8 +23,9 @@ class DisplayOrderListTest < Capybara::Rails::TestCase
   test "display other selected items" do
     visit items_path
 
-    @shoes.select
-    assert @shoes.selected?
+    # @shoes.select
+    # assert @shoes.selected?
+    click_on('select')
 
     visit orders_path
 
@@ -34,10 +37,9 @@ class DisplayOrderListTest < Capybara::Rails::TestCase
   test "remove items from selected items list" do
     visit items_path
 
-    @tshirt.select
-    assert @tshirt.selected?
-    @tshirt.unselect
-    assert_not @tshirt.selected?
+    click_on('select')
+    assert page.has_content?('remove')
+    click_on('remove')
 
     visit orders_path
 
