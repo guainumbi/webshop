@@ -12,7 +12,7 @@ class DisplayOrderListTest < Capybara::Rails::TestCase
     #instead of .select(ed?) ask: click_on button "select" //
     # @tshirt.select
     # assert @tshirt.selected?
-    click_on('select')
+    first.('select').click
 
     visit orders_path
 
@@ -23,9 +23,7 @@ class DisplayOrderListTest < Capybara::Rails::TestCase
   test "display other selected items" do
     visit items_path
 
-    # @shoes.select
-    # assert @shoes.selected?
-    click_on('select')
+    first.('select').click
 
     visit orders_path
 
@@ -37,7 +35,7 @@ class DisplayOrderListTest < Capybara::Rails::TestCase
   test "remove items from selected items list" do
     visit items_path
 
-    click_on('select')
+    first.('select').click
     assert page.has_content?('remove')
     click_on('remove')
 

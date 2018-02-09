@@ -7,6 +7,9 @@
       separator: ",",
       delimiter: ".",
       format: "%n %u") %>
+      <button>
+        <%= link_to (item.selected ? "remove" : "select"), item_selections_path(item), method: :post %>
+      </button>
     <% end %>
     <br>
 <% end %>
