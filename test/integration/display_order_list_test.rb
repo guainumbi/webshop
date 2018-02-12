@@ -9,42 +9,27 @@ class DisplayOrderListTest < Capybara::Rails::TestCase
   test "displays selected items" do
     visit items_path
 
-    #instead of .select(ed?) ask: click_on button "select" //
-    # @tshirt.select
-    # assert @tshirt.selected?
     first(:link, "select").click
-    # click_on('select').first
 
     visit orders_path
 
     assert page.has_content?('T-Shirt')
     assert page.has_content?('19,99 EUR')
+    assert_not page.has_content?('Shoes')
   end
 
-  # test "display other selected items" do
-  #   visit items_path
-  #
-  #   # @shoes.select
-  #   # assert @shoes.selected?
-  #   click_on('select').first
-  #
-  #   visit orders_path
-  #
-  #   assert page.has_content?('Shoes')
-  #   assert page.has_content?('59,99 EUR')
-  #   assert_not page.has_content?('T-Shirt')
-  # end
-  #
-  # test "remove items from selected items list" do
-  #   visit items_path
-  #
-  #   click_on('select').first
-  #   assert page.has_content?('remove')
-  #   click_on('remove')
-  #
-  #   visit orders_path
-  #
-  #   assert_not page.has_content?('T-Shirt')
-  # end
+  test "remove items from selected items list" do
+    visit items_path
 
+    assert page.has_content?('T-Shirt')
+    first(:link, "select").click
+
+    visit orders_path
+    assert page.has_content?('T-Shirt')
+    click_on('remove')
+
+    visit orders_path
+
+    assert_not page.has_content?('T-Shirt')
+  end
 end

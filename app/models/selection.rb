@@ -1,4 +1,4 @@
-class SelectedItem < ApplicationRecord
+class Selection < ApplicationRecord
   belongs_to :item
   belongs_to :order
 end

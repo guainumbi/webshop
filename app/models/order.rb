@@ -1,5 +1,5 @@
 class Order < ApplicationRecord
-  has_many :selected_items
-  has_many :items, through: :selected_items, dependent: :destroy
+  has_many :selections
+  has_many :items, through: :selections, dependent: :destroy
 
 end
