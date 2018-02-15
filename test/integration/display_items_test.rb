@@ -20,4 +20,25 @@ class DisplayItemsTest < Capybara::Rails::TestCase
     assert page.has_content?('59,99 EUR')
     assert_not page.has_content?('T-Shirt')
   end
+
+  test 'display line items count and select and remove links' do
+    Item.create!(title: 'T-Shirt', price: 19.99, currency: 'EUR')
+
+    visit items_path
+    within('span#quantity-display') do
+      assert page.has_content?('0')
+    end
+    assert page.has_content?('select')
+    click_on('select')
+    click_on('select')
+    within('span#quantity-display') do
+      assert page.has_content?('2')
+    end
+    assert page.has_content?('remove')
+    click_on('remove')
+    within('span#quantity-display') do
+      assert page.has_content?('0')
+    end
+    assert_not page.has_content?('remove')
+  end
 end
