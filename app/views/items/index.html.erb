@@ -7,7 +7,7 @@
     delimiter: ".",
     format: "%n %u") %>
     <span id="quantity-display"><%= item.selections.count %></span>
-    <%= link_to "select", item_selections_path(item), method: :post %>
+    <%= link_to "select", item_selections_path({item, (@order ? @order : '')}), method: :post %>
     <% if item.selections.count > 0 %>
       <%= link_to "remove", destroy_all_item_selections_path(item), method: :delete %>
     <% end %>

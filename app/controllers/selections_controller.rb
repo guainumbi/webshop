@@ -1,5 +1,6 @@
 class SelectionsController < ItemsController
   before_action :load_item
+  before_action :load_order
 
   def create
     @order ||= Order.create #if order exists: true if order = nil => order.create
@@ -27,5 +28,11 @@ class SelectionsController < ItemsController
       @item = Item.find(params[:item_id])
     end
 
-    # def load_order plus before_action
+    def load_order
+      if @order
+        @order = Order.find(params[:order_id])
+      else
+        @order = nil
+      end
+    end
 end

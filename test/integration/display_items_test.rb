@@ -21,7 +21,7 @@ class DisplayItemsTest < Capybara::Rails::TestCase
     assert_not page.has_content?('T-Shirt')
   end
 
-  test 'display line items count and select and remove links' do
+  test 'display line items count and select (and remove links if item selected)' do
     Item.create!(title: 'T-Shirt', price: 19.99, currency: 'EUR')
 
     visit items_path
