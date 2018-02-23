@@ -1,6 +1,10 @@
 class ItemsController < ApplicationController
+  require 'pry'
   def index
     @items = Item.all
+    @selections = Selection.all
+    @orders = Order.all
+    # binding.pry
   end
 
   def create

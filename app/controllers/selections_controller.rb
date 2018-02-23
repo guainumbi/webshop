@@ -1,13 +1,13 @@
 class SelectionsController < ItemsController
+  require 'pry'
   before_action :load_item
-  before_action :load_order
 
   def create
-    @order ||= Order.create #if order exists: true if order = nil => order.create
+    @order ||= Order.create
+    # @order = Order.last
     #create new association for this item
     Selection.create(item_id: @item.id, order_id: @order.id)
-
-    redirect_back(fallback_location: root_path)
+    redirect_back(fallback_location: root_path, order_id: @order.id)
   end
 
   def destroy
@@ -26,13 +26,5 @@ class SelectionsController < ItemsController
 
     def load_item
       @item = Item.find(params[:item_id])
-    end
-
-    def load_order
-      if @order
-        @order = Order.find(params[:order_id])
-      else
-        @order = nil
-      end
     end
 end

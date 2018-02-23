@@ -1,17 +1,22 @@
 <% @orders.each do |order| %>
-    <% order.items.each do |item| %>
-    <%= item.title %>
+
+  <% order.items.group(:title).each do |item_group| %>
+  <%= order.id%>
+    <%= item_group.title %>
     <%= number_to_currency(
-      item.price,
-      unit: item.currency,
+      item_group.price,
+      unit: item_group.currency,
       separator: ",",
       delimiter: ".",
       format: "%n %u") %>
-      <span id="quantity-display"><%= item.selections.count %></span>
-      <%= link_to "select", item_selections_path(item, order_id: (@order ? @order.id : '')), method: :post %>
-      <% if item.selections.count > 0 %>
-        <%= link_to "remove", destroy_all_item_selections_path(item), method: :delete %>
+      <%= link_to "+", item_selections_path(item_group, order_id: (@order ? @order.id : nil)), method: :post %>
+      <span id="quantity-display"><%= item_group.selections.count %></span>
+      <% if item_group.selections.count > 0 %>
+        <%= link_to "-", item_selection_path(item_group, id: @selections.where(item_id: item_group.id).last.id), method: :delete, class: "delete-item-minus" %>
+        <%= link_to "remove", destroy_all_item_selections_path(item_group), method: :delete %>
+      <% else %>
+        <span class="delete-item-minus">-</span>
       <% end %>
       <br>
-    <% end %>
+  <% end %>
 <% end %>
