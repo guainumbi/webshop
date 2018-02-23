@@ -9,7 +9,7 @@ class DisplayOrderListTest < Capybara::Rails::TestCase
   test "displays selected items" do
     visit items_path
 
-    first(:link, "select").click
+    first(:link, "+").click
 
     visit orders_path
 
@@ -22,7 +22,7 @@ class DisplayOrderListTest < Capybara::Rails::TestCase
     visit items_path
 
     assert page.has_content?('T-Shirt')
-    first(:link, "select").click
+    first(:link, "+").click
 
     visit orders_path
     assert page.has_content?('T-Shirt')
