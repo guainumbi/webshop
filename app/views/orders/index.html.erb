@@ -9,11 +9,11 @@
       separator: ",",
       delimiter: ".",
       format: "%n %u") %>
-      <%= link_to "+", item_selections_path(item_group, order_id: (@selections != [] ? @selections.last.order_id : nil)), method: :post %>
-      <span id="quantity-display"><%= item_group.selections.count %></span>
+      <%= link_to "+", item_selections_path(item_group, order_id: order.id), method: :post %>
+      <span id="quantity-display"><%= Selection.where(item_id: item_group.id, order_id: order.id).count %></span>
       <% if item_group.selections.count > 0 %>
-        <%= link_to "-", item_selection_path(item_group, id: @selections.where(item_id: item_group.id).last.id), method: :delete, class: "delete-item-minus" %>
-        <%= link_to "remove", destroy_all_item_selections_path(item_group), method: :delete %>
+        <%= link_to "-", item_selection_path(item_group, id: @selections.where(item_id: item_group.id, order_id: order.id).last.id), method: :delete, class: "delete-item-minus" %>
+        <%= link_to "remove", destroy_all_item_selections_path(item_group, order_id: order.id), method: :delete %>
       <% else %>
         <span class="delete-item-minus">-</span>
       <% end %>

@@ -4,7 +4,6 @@ class SelectionsController < ItemsController
 
   def create
     @order ||= Order.create
-    # @order = Order.last
     #create new association for this item
     Selection.create(item_id: @item.id, order_id: @order.id)
     redirect_back(fallback_location: root_path, order_id: @order.id)
@@ -17,7 +16,7 @@ class SelectionsController < ItemsController
   end
 
   def destroy_all_for_item
-    @item.selections.destroy_all #will have to be matched to an order_id in the future
+    Selection.where(item_id: @item.id, order_id: @order.id).destroy_all
 
     redirect_back(fallback_location: root_path)
   end
