@@ -9,7 +9,7 @@
       separator: ",",
       delimiter: ".",
       format: "%n %u") %>
-      <%= link_to "+", item_selections_path(item_group, order_id: (@order ? @order.id : nil)), method: :post %>
+      <%= link_to "+", item_selections_path(item_group, order_id: (@selections != [] ? @selections.last.order_id : nil)), method: :post %>
       <span id="quantity-display"><%= item_group.selections.count %></span>
       <% if item_group.selections.count > 0 %>
         <%= link_to "-", item_selection_path(item_group, id: @selections.where(item_id: item_group.id).last.id), method: :delete, class: "delete-item-minus" %>

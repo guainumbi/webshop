@@ -6,7 +6,7 @@
     separator: ",",
     delimiter: ".",
     format: "%n %u") %>
-    <%= link_to "+", item_selections_path(item, order_id: (@order ? @order.id : nil)), method: :post %>
+    <%= link_to "+", item_selections_path(item, order_id: (@selections != [] ? @selections.last.order_id : nil)), method: :post %>
     <span id="quantity-display"><%= item.selections.count %></span>
     <% if item.selections.count > 0 %>
       <%= link_to "-", item_selection_path(item, id: @selections.where(item_id: item.id).last.id), method: :delete, class: "delete-item-minus" %>
