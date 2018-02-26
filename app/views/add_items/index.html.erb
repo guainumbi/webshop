@@ -4,10 +4,24 @@
   <%= f.text_field :title %>
 
   <%= f.label :price %>
-  <%= f.text_field :price %>
+  <%= f.number_field :price, step: :any %>
 
   <%= f.label :currency %>
   <%= f.text_field :currency %>
 
   <%= f.submit %>
+<% end %>
+
+<br>
+
+<% @items.each do |item| %>
+  <%= item.title %>
+  <%= number_to_currency(
+    item.price,
+    unit: item.currency,
+    separator: ",",
+    delimiter: ".",
+    format: "%n %u") %>
+  <%= link_to "Delete item", item_path(item), method: :delete, data: {confirm: "Are you sure?"} %>
+  <br>
 <% end %>

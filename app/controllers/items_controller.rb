@@ -11,7 +11,7 @@ class ItemsController < ApplicationController
     @item = Item.create(item_params)
     if @item.save
       flash[:success] = "Item has been added to store!"
-      redirect_to items_path
+      redirect_to add_items_index_path
     else
       flash[:danger] = "Something went wrong! Your item has not been saved."
     end
@@ -20,7 +20,7 @@ class ItemsController < ApplicationController
   def destroy
     Item.find(params[:id]).destroy
     flash[:success] = "Item deleted"
-    redirect_to items_path
+    redirect_to add_items_index_path
   end
 
   def show
