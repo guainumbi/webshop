@@ -10,7 +10,7 @@ class DisplayAddingItemsFormTest < Capybara::Rails::TestCase
     assert page.has_css?('input[type="submit"]')
   end
 
-  test "form submit adds item, redirects to items-page and displays item" do
+  test "form submit adds item, reloads add_items-page and displays item" do
     visit add_items_index_path
 
     fill_in 'item[title]', :with => 'Dress'
@@ -18,7 +18,7 @@ class DisplayAddingItemsFormTest < Capybara::Rails::TestCase
     fill_in 'item[currency]', :with => 'EUR'
     find('input[type="submit"]').click
 
-    assert_equal current_path, items_path
+    assert_equal current_path, add_items_index_path
 
     assert page.has_content?('Dress')
     assert page.has_content?('23,00 EUR')
