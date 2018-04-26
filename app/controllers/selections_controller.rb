@@ -3,8 +3,9 @@ class SelectionsController < ItemsController
   before_action :load_item
 
   def create
-    @order ||= Order.create
+    @order = Order.create unless @order.persisted?
     #create new association for this item
+    session[:order_id] = @order.id
     Selection.create(item_id: @item.id, order_id: @order.id)
     redirect_back(fallback_location: root_path, order_id: @order.id)
   end

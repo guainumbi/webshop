@@ -4,8 +4,9 @@ class ApplicationController < ActionController::Base
 
 private
   def load_order
-    if params[:order_id] != nil
-      @order = Order.find(params[:order_id])
+    if session[:order_id] != nil
+      @order = Order.find(session[:order_id])
     end
+      @order ||= Order.new
   end
 end
